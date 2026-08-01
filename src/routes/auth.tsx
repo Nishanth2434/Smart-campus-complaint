@@ -40,7 +40,7 @@ function AuthPage() {
   const [busy, setBusy] = useState(false);
   const [forgot, setForgot] = useState(false);
 
-  const target = redirect && redirect.startsWith("/") ? redirect : isAdmin ? "/admin/dashboard" : "/track";
+  const target = redirect && redirect.startsWith("/") ? redirect : isAdmin ? "/admin/dashboard" : "/";
 
   useEffect(() => {
     if (!loading && session) navigate({ to: target, replace: true });
