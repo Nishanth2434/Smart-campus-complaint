@@ -1,5 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BarChart3, BellRing, CheckCircle2, ClipboardList, ImagePlus, QrCode } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -55,12 +62,12 @@ function Index() {
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
         {/* Hero tile */}
-        <section className="relative overflow-hidden rounded-[2.5rem] bg-secondary p-8 md:col-span-8 md:p-12">
-          <div className="relative z-10">
+        <section className="relative overflow-hidden rounded-[2.5rem] bg-secondary p-8 md:col-span-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+          <div className="relative z-10 flex-1">
             <Badge variant="outline" className="mb-5 border-primary/30 bg-card/70 text-primary">
               Campus issue management
             </Badge>
-            <h1 className="text-4xl font-extrabold leading-[1.1] text-primary md:text-6xl">
+            <h1 className="text-4xl font-extrabold leading-[1.1] text-primary md:text-5xl lg:text-6xl">
               Empowering your
               <br />
               campus experience.
@@ -85,6 +92,25 @@ function Index() {
               </Button>
             </div>
           </div>
+          
+          <div className="relative z-10 w-full md:w-5/12">
+            <Carousel className="w-full rounded-2xl overflow-hidden shadow-xl" opts={{ loop: true }}>
+              <CarouselContent>
+                <CarouselItem>
+                  <img src="/hero_slide_1.jpg" alt="Modern university campus" className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full" />
+                </CarouselItem>
+                <CarouselItem>
+                  <img src="/hero_slide_2.jpg" alt="Students studying in a bright modern library" className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full" />
+                </CarouselItem>
+                <CarouselItem>
+                  <img src="/hero_slide_3.jpg" alt="Smart interactive classroom" className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full" />
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
+          </div>
+
           <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
         </section>
 
