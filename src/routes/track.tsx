@@ -35,6 +35,7 @@ import {
   STATUS_FLOW,
   type ComplaintRow,
 } from "@/lib/complaints";
+import { Typewriter } from "@/components/ui/typewriter";
 
 export const Route = createFileRoute("/track")({
   head: () => ({
@@ -144,7 +145,9 @@ function TrackPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-16">
-      <h1 className="text-3xl font-bold tracking-tight">Track your complaints</h1>
+      <h1 className="text-3xl font-bold tracking-tight">
+        <Typewriter text="Track your complaints" speed={50} />
+      </h1>
       <p className="mt-3 text-muted-foreground">
         Search by complaint ID, title or category to see the latest status.
       </p>

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { categories } from "@/lib/portal-data";
 import { Button } from "@/components/ui/button";
+import { Typewriter } from "@/components/ui/typewriter";
 
 export const Route = createFileRoute("/categories")({
   head: () => ({
@@ -16,7 +17,7 @@ function CategoriesPage() {
       <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
           <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
-            Issue Categories
+            <Typewriter text="Issue Categories" speed={50} />
           </h1>
           <p className="mt-2 text-lg text-muted-foreground">
             Explore all available categories for reporting campus issues.

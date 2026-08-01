@@ -22,6 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { categories } from "@/lib/portal-data";
 import { classifyComplaint } from "@/lib/ai.functions";
+import { Typewriter } from "@/components/ui/typewriter";
 
 const searchSchema = z.object({
   location: z.string().max(120).optional(),
@@ -177,7 +178,9 @@ function SubmitPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-3xl font-bold tracking-tight">Submit a complaint</h1>
+      <h1 className="text-3xl font-bold tracking-tight">
+        <Typewriter text="Submit a complaint" speed={50} />
+      </h1>
       <p className="mt-3 text-muted-foreground">
         Give us the details and you'll receive a complaint ID you can track any time.
       </p>

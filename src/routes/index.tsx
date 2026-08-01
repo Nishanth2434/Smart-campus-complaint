@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Typewriter } from "@/components/ui/typewriter";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -69,10 +70,8 @@ function Index() {
             <Badge variant="outline" className="mb-5 border-primary/30 bg-card/70 text-primary">
               Campus issue management
             </Badge>
-            <h1 className="text-4xl font-extrabold leading-[1.1] text-primary md:text-5xl lg:text-6xl">
-              Empowering your
-              <br />
-              campus experience.
+            <h1 className="text-5xl font-extrabold tracking-tight text-primary md:text-7xl">
+              <Typewriter text="Empowering your campus experience." speed={40} className="text-primary" />
             </h1>
             <p className="mt-6 max-w-md text-lg font-medium text-foreground/75">
               The bridge between student voices and administrative excellence. Submit, track and
