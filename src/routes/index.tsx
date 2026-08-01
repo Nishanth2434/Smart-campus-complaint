@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BarChart3, BellRing, CheckCircle2, ClipboardList, ImagePlus, QrCode } from "lucide-react";
+import { ArrowRight, BarChart3, BellRing, CheckCircle2, ClipboardList, ImagePlus, QrCode, Activity, TrendingUp, Clock, Zap } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -120,24 +121,89 @@ function Index() {
         </section>
 
         {/* Stats tiles */}
-        <div className="grid grid-cols-1 gap-6 md:col-span-4">
-          <div className="flex flex-col justify-between rounded-[2rem] bg-primary p-8 text-primary-foreground">
-            <span className="text-sm font-bold uppercase tracking-widest opacity-80">
-              Resolution rate
-            </span>
-            <div className="mt-4">
-              <span className="text-6xl font-extrabold">92%</span>
-              <p className="mt-2 opacity-90">Of complaints closed within 72 hours.</p>
+        <div className="grid grid-cols-1 gap-6 md:col-span-4 h-full">
+          {/* Resolution Rate Card with Circular Progress */}
+          <div className="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-primary to-primary/80 p-8 text-primary-foreground shadow-lg transition-transform duration-300 hover:scale-[1.02]">
+            <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-white/10 blur-2xl transition-all group-hover:scale-150" />
+            <div className="flex items-center justify-between z-10">
+              <span className="text-sm font-bold uppercase tracking-widest text-primary-foreground/80 flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4" /> Resolution Rate
+              </span>
+            </div>
+            
+            <div className="mt-8 flex items-center justify-between z-10">
+              <div>
+                <span className="text-5xl font-black tracking-tight drop-shadow-md">92%</span>
+                <p className="mt-2 text-sm font-medium text-primary-foreground/90 max-w-[140px]">
+                  Of complaints closed within 72 hours.
+                </p>
+              </div>
+              <div className="relative flex h-20 w-20 items-center justify-center">
+                <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
+                  {/* Background Circle */}
+                  <path
+                    className="stroke-white/20"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeDasharray="100, 100"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  {/* Progress Circle */}
+                  <path
+                    className="stroke-white"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    fill="none"
+                    strokeDasharray="92, 100"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                </svg>
+                <TrendingUp className="absolute h-6 w-6 text-white drop-shadow-md" />
+              </div>
             </div>
           </div>
-          <div className="flex items-center justify-between rounded-[2rem] border border-border bg-card p-8">
-            <div>
-              <p className="text-3xl font-extrabold text-primary">18h</p>
-              <p className="text-sm font-semibold text-muted-foreground">Avg. response</p>
+
+          {/* Average Response Time Card */}
+          <div className="group relative flex items-center justify-between overflow-hidden rounded-[2rem] border border-border/50 bg-card/60 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:border-primary/30 hover:bg-card/90 hover:shadow-md">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="z-10">
+              <p className="text-3xl font-black tracking-tight text-foreground flex items-baseline gap-1">
+                18<span className="text-xl text-primary font-bold">h</span>
+              </p>
+              <p className="mt-1 flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
+                <Clock className="h-4 w-4" /> Avg. response time
+              </p>
             </div>
-            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-            </span>
+            <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/10 shadow-inner">
+              <Zap className="h-6 w-6 text-primary" />
+              <span className="absolute right-0 top-0 flex h-3 w-3 -translate-y-1/2 translate-x-1/2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-primary border-2 border-background"></span>
+              </span>
+            </div>
+          </div>
+          
+          {/* Active Issues Card */}
+          <div className="group flex items-center justify-between rounded-[2rem] border border-border/50 bg-card/60 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:border-primary/30 hover:bg-card/90 hover:shadow-md">
+            <div>
+              <p className="text-3xl font-black tracking-tight text-foreground">
+                24
+              </p>
+              <p className="mt-1 flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
+                <Activity className="h-4 w-4" /> Issues resolved today
+              </p>
+            </div>
+            <div className="flex -space-x-3">
+              <Avatar className="h-10 w-10 border-2 border-background">
+                <AvatarFallback className="bg-primary/20 text-primary font-bold">AJ</AvatarFallback>
+              </Avatar>
+              <Avatar className="h-10 w-10 border-2 border-background">
+                <AvatarFallback className="bg-secondary text-primary font-bold">SM</AvatarFallback>
+              </Avatar>
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary text-xs font-bold text-primary-foreground z-10">
+                +8
+              </div>
+            </div>
           </div>
         </div>
 
