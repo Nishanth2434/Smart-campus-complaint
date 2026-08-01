@@ -34,7 +34,7 @@ export function SiteHeader() {
           <img
             src="/logo.png"
             alt="Smart Campus Complaint Portal logo"
-            className="h-10 w-10 shrink-0 object-contain"
+            className="h-16 w-16 shrink-0 object-contain mix-blend-multiply"
           />
           <span className="font-display text-sm font-extrabold leading-tight text-primary sm:text-base">
             Smart Campus

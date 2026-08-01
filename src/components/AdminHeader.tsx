@@ -13,7 +13,7 @@ export function AdminHeader() {
           <img
             src="/logo.png"
             alt="Smart Campus Complaint Portal logo"
-            className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
+            className="h-12 w-12 shrink-0 object-contain sm:h-16 sm:w-16 mix-blend-multiply"
           />
           <span className="min-w-0 truncate text-sm font-semibold leading-tight sm:text-base">
             Administration
