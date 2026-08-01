@@ -66,6 +66,12 @@
   --color-sidebar-accent: var(--sidebar-accent);
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-delayed: float 8s ease-in-out infinite 2s;
+  --animate-spin-slow: spin-slow 10s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes float {

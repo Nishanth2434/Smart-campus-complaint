@@ -16,6 +16,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AdminHeader } from "@/components/AdminHeader";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
+import { ChakraSpinner } from "@/components/ui/ChakraSpinner";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/auth";
 
@@ -142,6 +143,12 @@ function RootComponent() {
       <AuthProvider>
         <div className="flex min-h-screen flex-col bg-background relative overflow-hidden pb-20 md:pb-0">
           {/* Animated Background Shapes */}
+          <div className="pointer-events-none absolute -left-20 top-10 text-primary">
+            <ChakraSpinner className="h-[500px] w-[500px] opacity-[0.03]" />
+          </div>
+          <div className="pointer-events-none absolute -right-40 bottom-10 text-primary">
+            <ChakraSpinner className="h-[800px] w-[800px] opacity-[0.02] [animation-direction:reverse]" />
+          </div>
           <div className="pointer-events-none absolute -left-10 top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl animate-float"></div>
           <div className="pointer-events-none absolute -right-20 top-1/3 h-96 w-96 rounded-full bg-secondary/30 blur-3xl animate-float-delayed"></div>
           <div className="pointer-events-none absolute bottom-10 left-1/3 h-72 w-72 rounded-full bg-primary/20 blur-3xl animate-float"></div>
