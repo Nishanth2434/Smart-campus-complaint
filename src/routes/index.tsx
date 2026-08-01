@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BarChart3, BellRing, CheckCircle2, ClipboardList, ImagePlus, QrCode } from "lucide-react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -94,7 +95,11 @@ function Index() {
           </div>
           
           <div className="relative z-10 w-full md:w-5/12">
-            <Carousel className="w-full rounded-2xl overflow-hidden shadow-xl" opts={{ loop: true }}>
+            <Carousel 
+              className="w-full rounded-2xl overflow-hidden shadow-xl" 
+              opts={{ loop: true }}
+              plugins={[Autoplay({ delay: 3500 })]}
+            >
               <CarouselContent>
                 <CarouselItem>
                   <img src="/hero_slide_1.jpg" alt="Modern university campus" className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full" />
