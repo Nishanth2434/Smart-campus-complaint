@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AdminHeader } from "@/components/AdminHeader";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/auth";
 
@@ -139,7 +140,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <div className="flex min-h-screen flex-col bg-background relative overflow-hidden">
+        <div className="flex min-h-screen flex-col bg-background relative overflow-hidden pb-20 md:pb-0">
           {/* Animated Background Shapes */}
           <div className="pointer-events-none absolute -left-10 top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl animate-float"></div>
           <div className="pointer-events-none absolute -right-20 top-1/3 h-96 w-96 rounded-full bg-secondary/30 blur-3xl animate-float-delayed"></div>
@@ -151,7 +152,12 @@ function RootComponent() {
               {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
               <Outlet />
             </main>
-            {!isAdmin && <SiteFooter />}
+            {!isAdmin && (
+              <>
+                <SiteFooter />
+                <MobileBottomNav />
+              </>
+            )}
           </div>
         </div>
         <Toaster />

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
-import campusLogo from "@/assets/campus-logo.png.asset.json";
+
 
 export function SiteFooter() {
   return (
@@ -8,9 +8,9 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <img
-            src={campusLogo.url}
+            src="/logo.png"
             alt="Smart Campus Complaint Portal logo"
-            className="h-16 w-16 object-contain"
+            className="h-16 w-16 object-contain mix-blend-multiply"
           />
           <h3 className="mt-3 text-sm font-semibold">Smart Campus Complaint Portal</h3>
           <p className="mt-3 text-sm text-muted-foreground">

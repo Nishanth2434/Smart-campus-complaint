@@ -74,51 +74,9 @@ export function SiteHeader() {
               <Link to="/auth">Sign in</Link>
             </Button>
           )}
-          <Button
-            variant="outline"
-            size="icon"
-            className="lg:hidden"
-            aria-label="Toggle navigation"
-            onClick={() => setOpen((v) => !v)}
-          >
-            <Menu className="h-4 w-4" />
-          </Button>
         </div>
       </div>
 
-      {open && (
-        <nav className="border-t border-border bg-card px-4 py-3 lg:hidden">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              onClick={() => setOpen(false)}
-              className="block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
-          {session ? (
-            <button
-              onClick={() => {
-                setOpen(false);
-                void handleSignOut();
-              }}
-              className="block w-full rounded-md px-3 py-2 text-left text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
-            >
-              Sign out
-            </button>
-          ) : (
-            <Link
-              to="/auth"
-              onClick={() => setOpen(false)}
-              className="block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
-            >
-              Sign in
-            </Link>
-          )}
-        </nav>
-      )}
     </header>
   );
 }
