@@ -50,7 +50,11 @@ function CategoryPage() {
 
         <div className="p-8 md:p-12">
           <div className="max-w-2xl">
-            <h2 className="text-2xl font-bold text-foreground">About this category</h2>
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 mb-4">
+              <span className="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+              <span className="text-sm font-bold text-primary uppercase tracking-widest">Category Overview</span>
+            </div>
+            <h2 className="text-3xl font-bold text-foreground">Understanding {category.name} Issues</h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
               {category.description}
             </p>
