@@ -172,7 +172,7 @@ function Index() {
           {topCategories.map((c) => (
             <Link
               key={c.id}
-              to="/submit"
+              to={`/category/${c.id}`}
               className="group rounded-[2rem] border border-primary/20 bg-primary/5 p-6 transition-all hover:bg-primary hover:shadow-[var(--shadow-soft)]"
             >
               <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-card text-primary">
@@ -187,8 +187,8 @@ function Index() {
             </Link>
           ))}
           <Link
-            to="/submit"
-            className="flex flex-col justify-between rounded-[2rem] bg-primary p-6 text-primary-foreground"
+            to="/categories"
+            className="flex flex-col justify-between rounded-[2rem] bg-primary p-6 text-primary-foreground transition-all hover:shadow-[var(--shadow-soft)]"
           >
             <h3 className="text-lg font-bold">And more…</h3>
             <p className="text-sm opacity-80">
