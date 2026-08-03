@@ -89,7 +89,9 @@ function AdminLogin() {
         </p>
         <div className="mt-4 rounded-md bg-primary/10 p-3 text-sm font-medium text-primary">
           <p>Default Login Credentials:</p>
-          <p>Email: <strong>principle@gmail.com</strong> | Password: <strong>123456</strong></p>
+          <p>
+            Email: <strong>principle@gmail.com</strong> | Password: <strong>123456</strong>
+          </p>
         </div>
       </div>
 
@@ -105,14 +107,32 @@ function AdminLogin() {
           <form className="space-y-4" onSubmit={onSubmit}>
             <div className="space-y-2">
               <Label htmlFor="admin-id">Staff email</Label>
-              <Input id="admin-id" name="email" type="email" placeholder="principal@college.edu" defaultValue="principle@gmail.com" required />
+              <Input
+                id="admin-id"
+                name="email"
+                type="email"
+                placeholder="principal@college.edu"
+                defaultValue="principle@gmail.com"
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="admin-pass">Password</Label>
-              <Input id="admin-pass" name="password" type="password" placeholder="••••••••" defaultValue="123456" required />
+              <Input
+                id="admin-pass"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                defaultValue="123456"
+                required
+              />
             </div>
             <Button type="submit" className="w-full" disabled={busy}>
-              {busy ? <Loader2 className="mr-1 h-4 w-4 animate-spin" /> : <LogIn className="mr-1 h-4 w-4" />}
+              {busy ? (
+                <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+              ) : (
+                <LogIn className="mr-1 h-4 w-4" />
+              )}
               Sign in to dashboard
             </Button>
           </form>
@@ -126,7 +146,7 @@ function AdminLogin() {
               to use a staff account.
             </p>
           )}
-          </CardContent>
+        </CardContent>
       </Card>
 
       <div className="mt-6 rounded-xl border border-dashed bg-muted/40 p-4 text-center">

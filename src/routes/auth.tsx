@@ -24,7 +24,10 @@ export const Route = createFileRoute("/auth")({
         content: "Sign in or create a student account to submit and track campus complaints.",
       },
       { property: "og:title", content: "Student Sign In — Campus Complaint Portal" },
-      { property: "og:description", content: "Create an account to report and track campus issues." },
+      {
+        property: "og:description",
+        content: "Create an account to report and track campus issues.",
+      },
     ],
   }),
   component: AuthPage,
@@ -40,7 +43,8 @@ function AuthPage() {
   const [busy, setBusy] = useState(false);
   const [forgot, setForgot] = useState(false);
 
-  const target = redirect && redirect.startsWith("/") ? redirect : isAdmin ? "/admin/dashboard" : "/";
+  const target =
+    redirect && redirect.startsWith("/") ? redirect : isAdmin ? "/admin/dashboard" : "/";
 
   useEffect(() => {
     if (!loading && session) navigate({ to: target, replace: true });
@@ -61,7 +65,9 @@ function AuthPage() {
     setBusy(false);
     if (error) {
       if (error.message.includes("Invalid login credentials")) {
-        return toast.error("Invalid email or password", { description: "Please check your credentials and try again." });
+        return toast.error("Invalid email or password", {
+          description: "Please check your credentials and try again.",
+        });
       }
       return toast.error("Could not sign in", { description: error.message });
     }
@@ -74,7 +80,12 @@ function AuthPage() {
     const form = new FormData(e.currentTarget);
     const email = emailSchema.safeParse(form.get("email"));
     const password = passwordSchema.safeParse(form.get("password"));
-    const fullName = z.string().trim().min(1, "Enter your name").max(100).safeParse(form.get("full_name"));
+    const fullName = z
+      .string()
+      .trim()
+      .min(1, "Enter your name")
+      .max(100)
+      .safeParse(form.get("full_name"));
     if (!fullName.success) return toast.error(fullName.error.issues[0].message);
     if (!email.success) return toast.error(email.error.issues[0].message);
     if (!password.success) return toast.error(password.error.issues[0].message);
@@ -87,7 +98,9 @@ function AuthPage() {
         emailRedirectTo: window.location.origin,
         data: {
           full_name: fullName.data,
-          roll_id: String(form.get("roll_id") ?? "").trim().slice(0, 40),
+          roll_id: String(form.get("roll_id") ?? "")
+            .trim()
+            .slice(0, 40),
         },
       },
     });
@@ -96,7 +109,6 @@ function AuthPage() {
     toast.success("Account created", { description: "You can start reporting issues right away." });
     navigate({ to: target, replace: true });
   };
-
 
   const sendReset = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -131,7 +143,13 @@ function AuthPage() {
             <form className="space-y-4" onSubmit={sendReset}>
               <div className="space-y-2">
                 <Label htmlFor="fp-email">Email</Label>
-                <Input id="fp-email" name="email" type="email" placeholder="yourname@gmail.com" required />
+                <Input
+                  id="fp-email"
+                  name="email"
+                  type="email"
+                  placeholder="yourname@gmail.com"
+                  required
+                />
               </div>
               <Button type="submit" className="w-full" disabled={busy}>
                 <Mail className="mr-1 h-4 w-4" /> Send reset link
@@ -164,7 +182,6 @@ function AuthPage() {
           <CardDescription>{"\n"}</CardDescription>
         </CardHeader>
         <CardContent>
-
           <Tabs defaultValue="signin">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="signin">Sign in</TabsTrigger>
@@ -175,11 +192,23 @@ function AuthPage() {
               <form className="space-y-4 pt-4" onSubmit={signIn}>
                 <div className="space-y-2">
                   <Label htmlFor="in-email">Email</Label>
-                  <Input id="in-email" name="email" type="email" placeholder="yourname@gmail.com" required />
+                  <Input
+                    id="in-email"
+                    name="email"
+                    type="email"
+                    placeholder="yourname@gmail.com"
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="in-pass">Password</Label>
-                  <Input id="in-pass" name="password" type="password" placeholder="••••••••" required />
+                  <Input
+                    id="in-pass"
+                    name="password"
+                    type="password"
+                    placeholder="••••••••"
+                    required
+                  />
                 </div>
                 <Button type="submit" className="w-full" disabled={busy}>
                   <LogIn className="mr-1 h-4 w-4" /> Sign in
@@ -206,11 +235,23 @@ function AuthPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="up-email">Email</Label>
-                  <Input id="up-email" name="email" type="email" placeholder="yourname@gmail.com" required />
+                  <Input
+                    id="up-email"
+                    name="email"
+                    type="email"
+                    placeholder="yourname@gmail.com"
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="up-pass">Password</Label>
-                  <Input id="up-pass" name="password" type="password" placeholder="At least 6 characters" required />
+                  <Input
+                    id="up-pass"
+                    name="password"
+                    type="password"
+                    placeholder="At least 6 characters"
+                    required
+                  />
                 </div>
                 <Button type="submit" className="w-full" disabled={busy}>
                   <UserPlus className="mr-1 h-4 w-4" /> Create account

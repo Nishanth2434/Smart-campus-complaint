@@ -28,7 +28,8 @@ function CategoriesPage() {
         {categories.map((c) => (
           <Link
             key={c.id}
-            to={`/category/${c.id}`}
+            to="/category/$categoryId"
+            params={{ categoryId: c.id }}
             className="group overflow-hidden rounded-[2rem] border border-border bg-card transition-all hover:shadow-[var(--shadow-soft)]"
           >
             <img

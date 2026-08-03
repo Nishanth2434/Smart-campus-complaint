@@ -130,12 +130,32 @@ export const demoComplaints: ComplaintRow[] = [
 ];
 
 export const demoProfiles = [
-  { id: "demo-student-1", full_name: "Aarav Menon", roll_id: "21CS045", email: "aarav@college.edu" },
+  {
+    id: "demo-student-1",
+    full_name: "Aarav Menon",
+    roll_id: "21CS045",
+    email: "aarav@college.edu",
+  },
   { id: "demo-student-2", full_name: "Divya Rao", roll_id: "22EC112", email: "divya@college.edu" },
-  { id: "demo-student-3", full_name: "Karthik S", roll_id: "21ME008", email: "karthik@college.edu" },
-  { id: "demo-student-4", full_name: "Nisha Verma", roll_id: "23IT076", email: "nisha@college.edu" },
+  {
+    id: "demo-student-3",
+    full_name: "Karthik S",
+    roll_id: "21ME008",
+    email: "karthik@college.edu",
+  },
+  {
+    id: "demo-student-4",
+    full_name: "Nisha Verma",
+    roll_id: "23IT076",
+    email: "nisha@college.edu",
+  },
   { id: "demo-student-5", full_name: "Rahul Iyer", roll_id: "22CS130", email: "rahul@college.edu" },
-  { id: "demo-student-6", full_name: "Sneha Pillai", roll_id: "21EE054", email: "sneha@college.edu" },
+  {
+    id: "demo-student-6",
+    full_name: "Sneha Pillai",
+    roll_id: "21EE054",
+    email: "sneha@college.edu",
+  },
 ];
 
 export function demoHistory(c: ComplaintRow): StatusHistoryRow[] {

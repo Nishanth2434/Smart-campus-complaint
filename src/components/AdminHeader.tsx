@@ -26,33 +26,33 @@ export function AdminHeader() {
           {!onLogin && (
             <>
               <Link
-            to="/admin/dashboard"
-            activeProps={{ className: "bg-background text-foreground" }}
-            className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            Dashboard
-          </Link>
-          <Link
-            to="/admin/reports"
-            activeProps={{ className: "bg-background text-foreground" }}
-            className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            Reports
-          </Link>
-          <Link
-            to="/admin/users"
-            activeProps={{ className: "bg-background text-foreground" }}
-            className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            Users
-          </Link>
-          <Link
-            to="/admin/qr"
-            activeProps={{ className: "bg-background text-foreground" }}
-            className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            QR codes
-          </Link>
+                to="/admin/dashboard"
+                activeProps={{ className: "bg-background text-foreground" }}
+                className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                Dashboard
+              </Link>
+              <Link
+                to="/admin/reports"
+                activeProps={{ className: "bg-background text-foreground" }}
+                className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                Reports
+              </Link>
+              <Link
+                to="/admin/users"
+                activeProps={{ className: "bg-background text-foreground" }}
+                className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                Users
+              </Link>
+              <Link
+                to="/admin/qr"
+                activeProps={{ className: "bg-background text-foreground" }}
+                className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                QR codes
+              </Link>
             </>
           )}
           <Button asChild variant="outline" size="sm" className="shrink-0">

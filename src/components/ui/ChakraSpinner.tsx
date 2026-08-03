@@ -2,14 +2,22 @@ import { cn } from "@/lib/utils";
 
 export function ChakraSpinner({ className }: { className?: string }) {
   return (
-    <svg 
-      className={cn("animate-spin-slow opacity-10", className)} 
-      viewBox="0 0 100 100" 
+    <svg
+      className={cn("animate-spin-slow opacity-10", className)}
+      viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
       <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="6" />
-      <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+      <circle
+        cx="50"
+        cy="50"
+        r="35"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+        opacity="0.3"
+      />
       <circle cx="50" cy="50" r="8" fill="currentColor" />
       {Array.from({ length: 24 }).map((_, i) => (
         <path
@@ -27,7 +35,7 @@ export function ChakraSpinner({ className }: { className?: string }) {
           cy="7"
           r="1.5"
           fill="currentColor"
-          transform={`rotate(${(i * 15) + 7.5} 50 50)`}
+          transform={`rotate(${i * 15 + 7.5} 50 50)`}
         />
       ))}
     </svg>

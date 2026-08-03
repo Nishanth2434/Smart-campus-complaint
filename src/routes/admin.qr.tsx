@@ -89,8 +89,8 @@ function AdminQrPage() {
         <QrCode className="h-7 w-7 text-primary" /> Location QR codes
       </h1>
       <p className="mt-3 text-muted-foreground">
-        Print these near classrooms, washrooms or hostels. Scanning opens the complaint form with the
-        location (and category) already filled in.
+        Print these near classrooms, washrooms or hostels. Scanning opens the complaint form with
+        the location (and category) already filled in.
       </p>
 
       <Card className="mt-8">

@@ -118,17 +118,31 @@ function ReportsPage() {
     { label: "Complaints logged", value: complaints.length, hint: "this month", icon: BarChart3 },
     { label: "Resolution rate", value: `${rate}%`, hint: `${resolved} closed`, icon: TrendingUp },
     { label: "Avg. resolution time", value: "2.4 days", hint: "target 3 days", icon: Timer },
-    { label: "Open backlog", value: complaints.length - resolved, hint: "pending + in progress", icon: BarChart3 },
+    {
+      label: "Open backlog",
+      value: complaints.length - resolved,
+      hint: "pending + in progress",
+      icon: BarChart3,
+    },
   ];
 
   const download = () => {
     const rows = [
       ["ID", "Title", "Category", "Location", "Status", "Priority", "Submitted", "Assigned to"],
       ...complaints.map((c) => [
-        c.id, c.title, c.category, c.location, c.status, c.priority, c.submitted, c.assignedTo,
+        c.id,
+        c.title,
+        c.category,
+        c.location,
+        c.status,
+        c.priority,
+        c.submitted,
+        c.assignedTo,
       ]),
     ];
-    const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const csv = rows
+      .map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
     const a = document.createElement("a");
     a.href = url;
@@ -200,7 +214,13 @@ function ReportsPage() {
       startY: (doc as any).lastAutoTable.finalY + 24,
       head: [["ID", "Complaint", "Category", "Location", "Priority", "Submitted", "Status"]],
       body: complaints.map((c) => [
-        c.id, c.title, c.category, c.location, c.priority, c.submitted, c.status,
+        c.id,
+        c.title,
+        c.category,
+        c.location,
+        c.priority,
+        c.submitted,
+        c.status,
       ]),
       headStyles: { fillColor: [15, 118, 110] },
       styles: { fontSize: 8, cellPadding: 4, overflow: "linebreak" },
@@ -262,11 +282,19 @@ function ReportsPage() {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <Card>
-          <CardHeader><CardTitle className="text-base">Status breakdown</CardTitle></CardHeader>
+          <CardHeader>
+            <CardTitle className="text-base">Status breakdown</CardTitle>
+          </CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={statusData} dataKey="value" nameKey="name" innerRadius={55} outerRadius={95}>
+                <Pie
+                  data={statusData}
+                  dataKey="value"
+                  nameKey="name"
+                  innerRadius={55}
+                  outerRadius={95}
+                >
                   {statusData.map((s) => (
                     <Cell key={s.name} fill={statusColors[s.name]} />
                   ))}
@@ -279,7 +307,9 @@ function ReportsPage() {
         </Card>
 
         <Card>
-          <CardHeader><CardTitle className="text-base">Complaints by category</CardTitle></CardHeader>
+          <CardHeader>
+            <CardTitle className="text-base">Complaints by category</CardTitle>
+          </CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={categoryData} margin={{ left: -20, bottom: 40 }}>
@@ -294,7 +324,9 @@ function ReportsPage() {
         </Card>
 
         <Card className="lg:col-span-2">
-          <CardHeader><CardTitle className="text-base">Weekly trend — received vs resolved</CardTitle></CardHeader>
+          <CardHeader>
+            <CardTitle className="text-base">Weekly trend — received vs resolved</CardTitle>
+          </CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={trendData}>
@@ -312,7 +344,9 @@ function ReportsPage() {
       </div>
 
       <Card className="mt-6">
-        <CardHeader><CardTitle className="text-base">Detailed report</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle className="text-base">Detailed report</CardTitle>
+        </CardHeader>
         <CardContent className="overflow-x-auto">
           <Table>
             <TableHeader>
@@ -334,7 +368,9 @@ function ReportsPage() {
                   <TableCell>{c.priority}</TableCell>
                   <TableCell className="text-muted-foreground">{c.submitted}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className={statusStyles[c.status]}>{c.status}</Badge>
+                    <Badge variant="outline" className={statusStyles[c.status]}>
+                      {c.status}
+                    </Badge>
                   </TableCell>
                 </TableRow>
               ))}

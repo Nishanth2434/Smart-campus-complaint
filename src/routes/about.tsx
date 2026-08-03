@@ -24,9 +24,21 @@ export const Route = createFileRoute("/about")({
 });
 
 const audience = [
-  { icon: GraduationCap, title: "Students", text: "Report hostel, classroom, Wi-Fi and transport issues and follow progress." },
-  { icon: Users, title: "Faculty & staff", text: "Flag facility problems that interrupt teaching and daily work." },
-  { icon: Building2, title: "Administration", text: "See every open issue, assign owners and measure resolution times." },
+  {
+    icon: GraduationCap,
+    title: "Students",
+    text: "Report hostel, classroom, Wi-Fi and transport issues and follow progress.",
+  },
+  {
+    icon: Users,
+    title: "Faculty & staff",
+    text: "Flag facility problems that interrupt teaching and daily work.",
+  },
+  {
+    icon: Building2,
+    title: "Administration",
+    text: "See every open issue, assign owners and measure resolution times.",
+  },
 ];
 
 function AboutPage() {
@@ -34,8 +46,9 @@ function AboutPage() {
     <div className="mx-auto max-w-4xl px-4 py-16">
       <h1 className="text-3xl font-bold tracking-tight">About the portal</h1>
       <p className="mt-4 text-lg text-muted-foreground">
-        Campus complaints usually travel by word of mouth, paper registers or scattered messages — so they get
-        lost. This portal replaces that with one transparent record that everybody can see.
+        Campus complaints usually travel by word of mouth, paper registers or scattered messages —
+        so they get lost. This portal replaces that with one transparent record that everybody can
+        see.
       </p>
 
       <Card className="mt-10">
@@ -44,8 +57,8 @@ function AboutPage() {
           <div>
             <h2 className="font-semibold">Our goal</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Make it effortless to report a problem, impossible for it to be forgotten, and easy for the
-              administration to prove it was solved.
+              Make it effortless to report a problem, impossible for it to be forgotten, and easy
+              for the administration to prove it was solved.
             </p>
           </div>
         </CardContent>
@@ -65,9 +78,18 @@ function AboutPage() {
       <h2 className="mt-14 text-2xl font-semibold tracking-tight">The complaint lifecycle</h2>
       <ol className="mt-6 space-y-4 border-l border-border pl-6">
         {[
-          ["Student logs in", "Verified campus accounts keep reports accountable — with an anonymous option for sensitive cases."],
-          ["Complaint submitted", "Category, location, description and photo evidence in one short form."],
-          ["Admin review", "The complaint appears on the dashboard and is assigned to a department."],
+          [
+            "Student logs in",
+            "Verified campus accounts keep reports accountable — with an anonymous option for sensitive cases.",
+          ],
+          [
+            "Complaint submitted",
+            "Category, location, description and photo evidence in one short form.",
+          ],
+          [
+            "Admin review",
+            "The complaint appears on the dashboard and is assigned to a department.",
+          ],
           ["Staff resolution", "The responsible team works on it and reports back."],
           ["Closed with feedback", "The student is notified and rates the resolution."],
         ].map(([title, text]) => (

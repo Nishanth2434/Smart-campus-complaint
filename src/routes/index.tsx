@@ -1,5 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BarChart3, BellRing, CheckCircle2, ClipboardList, ImagePlus, QrCode, Activity, TrendingUp, Clock, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  BellRing,
+  CheckCircle2,
+  ClipboardList,
+  ImagePlus,
+  QrCode,
+  Activity,
+  TrendingUp,
+  Clock,
+  Zap,
+} from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -44,17 +56,51 @@ const steps = [
 ];
 
 const features = [
-  { icon: ClipboardList, title: "Category-based reporting", text: "Nine campus categories so the right team gets it first time." },
-  { icon: ImagePlus, title: "Photo evidence", text: "Attach images so staff can see the problem before arriving." },
-  { icon: BellRing, title: "Status notifications", text: "Know the moment a complaint moves to In Progress or Resolved." },
-  { icon: BarChart3, title: "Analytics dashboard", text: "Live counts, resolution times and category hotspots." },
-  { icon: QrCode, title: "QR spot reporting", text: "Scan a QR at any location to pre-fill the complaint form." },
-  { icon: CheckCircle2, title: "Anonymous option", text: "Raise sensitive concerns without revealing your identity." },
+  {
+    icon: ClipboardList,
+    title: "Category-based reporting",
+    text: "Nine campus categories so the right team gets it first time.",
+  },
+  {
+    icon: ImagePlus,
+    title: "Photo evidence",
+    text: "Attach images so staff can see the problem before arriving.",
+  },
+  {
+    icon: BellRing,
+    title: "Status notifications",
+    text: "Know the moment a complaint moves to In Progress or Resolved.",
+  },
+  {
+    icon: BarChart3,
+    title: "Analytics dashboard",
+    text: "Live counts, resolution times and category hotspots.",
+  },
+  {
+    icon: QrCode,
+    title: "QR spot reporting",
+    text: "Scan a QR at any location to pre-fill the complaint form.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Anonymous option",
+    text: "Raise sensitive concerns without revealing your identity.",
+  },
 ];
 
 const activity = [
-  { id: "CMP-1042", title: "Projector not working — Room B-204", status: "In Progress", tone: "bg-warning" },
-  { id: "CMP-1041", title: "No water on 2nd floor washroom", status: "Pending", tone: "bg-secondary" },
+  {
+    id: "CMP-1042",
+    title: "Projector not working — Room B-204",
+    status: "In Progress",
+    tone: "bg-warning",
+  },
+  {
+    id: "CMP-1041",
+    title: "No water on 2nd floor washroom",
+    status: "Pending",
+    tone: "bg-secondary",
+  },
   { id: "CMP-1038", title: "Wi-Fi dead zone near library", status: "Resolved", tone: "bg-primary" },
 ];
 
@@ -71,7 +117,11 @@ function Index() {
               Campus issue management
             </Badge>
             <h1 className="text-5xl font-extrabold tracking-tight text-primary md:text-7xl">
-              <Typewriter text="Empowering your campus experience." speed={40} className="text-primary" />
+              <Typewriter
+                text="Empowering your campus experience."
+                speed={40}
+                className="text-primary"
+              />
             </h1>
             <p className="mt-6 max-w-md text-lg font-medium text-foreground/75">
               The bridge between student voices and administrative excellence. Submit, track and
@@ -93,22 +143,34 @@ function Index() {
               </Button>
             </div>
           </div>
-          
+
           <div className="relative z-10 w-full md:w-5/12">
-            <Carousel 
-              className="w-full rounded-2xl overflow-hidden shadow-xl" 
+            <Carousel
+              className="w-full rounded-2xl overflow-hidden shadow-xl"
               opts={{ loop: true }}
               plugins={[Autoplay({ delay: 3500 })]}
             >
               <CarouselContent>
                 <CarouselItem>
-                  <img src="/hero_slide_1.jpg" alt="Modern university campus" className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full" />
+                  <img
+                    src="/hero_slide_1.jpg"
+                    alt="Modern university campus"
+                    className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full"
+                  />
                 </CarouselItem>
                 <CarouselItem>
-                  <img src="/hero_slide_2.jpg" alt="Students studying in a bright modern library" className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full" />
+                  <img
+                    src="/hero_slide_2.jpg"
+                    alt="Students studying in a bright modern library"
+                    className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full"
+                  />
                 </CarouselItem>
                 <CarouselItem>
-                  <img src="/hero_slide_3.jpg" alt="Smart interactive classroom" className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full" />
+                  <img
+                    src="/hero_slide_3.jpg"
+                    alt="Smart interactive classroom"
+                    className="aspect-square md:aspect-[4/5] object-cover rounded-2xl w-full"
+                  />
                 </CarouselItem>
               </CarouselContent>
               <CarouselPrevious className="left-2" />
@@ -129,7 +191,7 @@ function Index() {
                 <CheckCircle2 className="h-4 w-4" /> Resolution Rate
               </span>
             </div>
-            
+
             <div className="mt-8 flex items-center justify-between z-10">
               <div>
                 <span className="text-5xl font-black tracking-tight drop-shadow-md">92%</span>
@@ -181,13 +243,11 @@ function Index() {
               </span>
             </div>
           </div>
-          
+
           {/* Active Issues Card */}
           <div className="group flex items-center justify-between rounded-[2rem] border border-border/50 bg-card/60 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:border-primary/30 hover:bg-card/90 hover:shadow-md">
             <div>
-              <p className="text-3xl font-black tracking-tight text-foreground">
-                24
-              </p>
+              <p className="text-3xl font-black tracking-tight text-foreground">24</p>
               <p className="mt-1 flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
                 <Activity className="h-4 w-4" /> Issues resolved today
               </p>
@@ -237,7 +297,8 @@ function Index() {
           {topCategories.map((c) => (
             <Link
               key={c.id}
-              to={`/category/${c.id}`}
+              to="/category/$categoryId"
+              params={{ categoryId: c.id }}
               className="group rounded-[2rem] border border-primary/20 bg-primary/5 p-6 transition-all hover:bg-primary hover:shadow-[var(--shadow-soft)]"
             >
               <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-card text-primary">

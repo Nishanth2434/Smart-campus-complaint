@@ -22,12 +22,12 @@ export function Typewriter({
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    
+
     const startTimer = setTimeout(() => {
       setStarted(true);
       setIsTyping(true);
       let i = 0;
-      
+
       timer = setInterval(() => {
         setDisplayedText(text.substring(0, i + 1));
         i++;
@@ -51,12 +51,15 @@ export function Typewriter({
         <span
           className={cn(
             "inline-block w-1.5 h-[0.9em] ml-1 bg-current align-middle",
-            isTyping ? "animate-none" : "animate-pulse"
+            isTyping ? "animate-none" : "animate-pulse",
           )}
         />
       )}
       {/* Invisible text to prevent layout shifts */}
-      <span className="invisible h-0 block overflow-hidden leading-none select-none" aria-hidden="true">
+      <span
+        className="invisible h-0 block overflow-hidden leading-none select-none"
+        aria-hidden="true"
+      >
         {text}
       </span>
     </span>

@@ -103,7 +103,9 @@ function SubmitPage() {
       });
       const matched = categories.find((c) => c.name === result.category);
       if (!matched) {
-        return toast.error("Couldn't suggest a category", { description: "Please pick one manually." });
+        return toast.error("Couldn't suggest a category", {
+          description: "Please pick one manually.",
+        });
       }
       setCategory(matched.id);
       if (result.priority) setPriority(result.priority as "Low" | "Medium" | "High");
@@ -111,7 +113,9 @@ function SubmitPage() {
         description: `${matched.name}${result.priority ? ` · ${result.priority} priority` : ""}`,
       });
     } catch {
-      toast.error("Auto-categorise unavailable", { description: "Please choose a category manually." });
+      toast.error("Auto-categorise unavailable", {
+        description: "Please choose a category manually.",
+      });
     } finally {
       setSuggesting(false);
     }
@@ -310,7 +314,9 @@ function SubmitPage() {
                   const picked = e.target.files?.[0];
                   if (!picked) return setFile(null);
                   if (picked.size > 5 * 1024 * 1024) {
-                    toast.error("Image too large", { description: "Please upload a file under 5 MB." });
+                    toast.error("Image too large", {
+                      description: "Please upload a file under 5 MB.",
+                    });
                     e.target.value = "";
                     setFile(null);
                     return;

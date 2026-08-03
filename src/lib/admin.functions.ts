@@ -104,18 +104,16 @@ export const createAdminAccount = createServerFn({ method: "POST" })
     const userId = created.user?.id;
     if (!userId) throw new Error("Account could not be created");
 
-    await supabaseAdmin
-      .from("profiles")
-      .upsert(
-        {
-          id: userId,
-          full_name: data.fullName,
-          email: data.email,
-          department: data.department,
-          phone: data.phone,
-        },
-        { onConflict: "id" },
-      );
+    await supabaseAdmin.from("profiles").upsert(
+      {
+        id: userId,
+        full_name: data.fullName,
+        email: data.email,
+        department: data.department,
+        phone: data.phone,
+      },
+      { onConflict: "id" },
+    );
 
     const { error: roleErr } = await supabaseAdmin
       .from("user_roles")

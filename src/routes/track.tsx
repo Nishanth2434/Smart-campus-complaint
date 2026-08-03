@@ -29,12 +29,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import {
-  fetchMyComplaints,
-  statusStyles,
-  STATUS_FLOW,
-  type ComplaintRow,
-} from "@/lib/complaints";
+import { fetchMyComplaints, statusStyles, STATUS_FLOW, type ComplaintRow } from "@/lib/complaints";
 import { Typewriter } from "@/components/ui/typewriter";
 
 export const Route = createFileRoute("/track")({
@@ -163,9 +158,7 @@ function TrackPage() {
             {notificationsQuery.data?.map((n) => (
               <p key={n.id}>
                 {n.message}{" "}
-                <span className="text-xs">
-                  · {new Date(n.created_at).toLocaleDateString()}
-                </span>
+                <span className="text-xs">· {new Date(n.created_at).toLocaleDateString()}</span>
               </p>
             ))}
           </CardContent>
@@ -241,9 +234,15 @@ function TrackPage() {
               </div>
             </CardHeader>
             <CardContent className="grid gap-2 text-sm text-muted-foreground sm:grid-cols-4">
-              <p><span className="text-foreground">ID:</span> {c.reference}</p>
-              <p><span className="text-foreground">Category:</span> {c.category}</p>
-              <p><span className="text-foreground">Location:</span> {c.location}</p>
+              <p>
+                <span className="text-foreground">ID:</span> {c.reference}
+              </p>
+              <p>
+                <span className="text-foreground">Category:</span> {c.category}
+              </p>
+              <p>
+                <span className="text-foreground">Location:</span> {c.location}
+              </p>
               <p>
                 <span className="text-foreground">Filed:</span>{" "}
                 {new Date(c.created_at).toLocaleDateString()}

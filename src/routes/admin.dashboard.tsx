@@ -56,7 +56,8 @@ import {
   demoHistory,
   demoProfiles,
   setDemoMode,
-  useDemoMode, isDemoMode,
+  useDemoMode,
+  isDemoMode,
 } from "@/lib/demo-mode";
 
 export const Route = createFileRoute("/admin/dashboard")({
@@ -136,10 +137,9 @@ function DashboardPage() {
       qc.invalidateQueries({ queryKey: ["all-complaints"] });
       qc.invalidateQueries({ queryKey: ["complaint-history", c.id] });
       setSelected((prev) => (prev && prev.id === c.id ? { ...prev, ...patch } : prev));
-      toast.success(
-        patch.status ? `${c.reference} → ${patch.status}` : `${c.reference} assigned`,
-        { description: c.title },
-      );
+      toast.success(patch.status ? `${c.reference} → ${patch.status}` : `${c.reference} assigned`, {
+        description: c.title,
+      });
     },
     onError: (e: Error) => toast.error("Update failed", { description: e.message }),
   });
@@ -169,8 +169,7 @@ function DashboardPage() {
   const items = demo ? demoRows : (complaintsQuery.data ?? []);
   const profileList = demo ? demoProfiles : (profilesQuery.data ?? []);
   const profileFor = (id: string) => profileList.find((p) => p.id === id);
-  const historyRows =
-    demo && selected ? demoHistory(selected) : (historyQuery.data ?? []);
+  const historyRows = demo && selected ? demoHistory(selected) : (historyQuery.data ?? []);
   const reporterOf = (c: ComplaintRow) => {
     if (c.is_anonymous) return "Anonymous";
     const p = profileFor(c.user_id);
@@ -180,19 +179,26 @@ function DashboardPage() {
 
   const rows = items.filter(
     (c) =>
-      (status === "all" || c.status === status) &&
-      (category === "all" || c.category === category),
+      (status === "all" || c.status === status) && (category === "all" || c.category === category),
   );
 
   const stats = [
     { label: "Total complaints", value: items.length, icon: ListChecks },
-    { label: "Pending", value: items.filter((c) => c.status === "Pending").length, icon: AlertTriangle },
+    {
+      label: "Pending",
+      value: items.filter((c) => c.status === "Pending").length,
+      icon: AlertTriangle,
+    },
     {
       label: "Assigned / in progress",
       value: items.filter((c) => c.status === "Assigned" || c.status === "In Progress").length,
       icon: Clock,
     },
-    { label: "Resolved", value: items.filter((c) => c.status === "Resolved").length, icon: CheckCircle2 },
+    {
+      label: "Resolved",
+      value: items.filter((c) => c.status === "Resolved").length,
+      icon: CheckCircle2,
+    },
   ];
 
   const byCategory = categories
@@ -280,20 +286,28 @@ function DashboardPage() {
             <CardTitle className="text-base">All complaints</CardTitle>
             <div className="grid grid-cols-2 gap-2 sm:flex">
               <Select value={status} onValueChange={setStatus}>
-                <SelectTrigger className="w-full sm:w-36"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-full sm:w-36">
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All statuses</SelectItem>
                   {STATUS_FLOW.map((s) => (
-                    <SelectItem key={s} value={s}>{s}</SelectItem>
+                    <SelectItem key={s} value={s}>
+                      {s}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger className="w-full sm:w-40"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-full sm:w-40">
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All categories</SelectItem>
                   {categories.map((c) => (
-                    <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                    <SelectItem key={c.id} value={c.name}>
+                      {c.name}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -325,11 +339,15 @@ function DashboardPage() {
                         })
                       }
                     >
-                      <SelectTrigger className="h-9 w-full text-xs"><SelectValue /></SelectTrigger>
+                      <SelectTrigger className="h-9 w-full text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="unassigned">Unassigned</SelectItem>
                         {STAFF_OPTIONS.map((s) => (
-                          <SelectItem key={s} value={s}>{s}</SelectItem>
+                          <SelectItem key={s} value={s}>
+                            {s}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -339,10 +357,14 @@ function DashboardPage() {
                         updateMutation.mutate({ c, patch: { status: v as ComplaintStatus } })
                       }
                     >
-                      <SelectTrigger className="h-9 w-full text-xs"><SelectValue /></SelectTrigger>
+                      <SelectTrigger className="h-9 w-full text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
                       <SelectContent>
                         {STATUS_FLOW.map((s) => (
-                          <SelectItem key={s} value={s}>{s}</SelectItem>
+                          <SelectItem key={s} value={s}>
+                            {s}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -377,91 +399,103 @@ function DashboardPage() {
             </div>
 
             <div className="hidden overflow-x-auto md:block">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>ID</TableHead>
-                  <TableHead>Complaint</TableHead>
-                  <TableHead>Assigned to</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Action</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rows.map((c) => (
-                  <TableRow key={c.id}>
-                    <TableCell className="font-medium">{c.reference}</TableCell>
-                    <TableCell>
-                      <span className="block">{c.title}</span>
-                      <span className="text-xs text-muted-foreground">
-                        {c.category} · {c.location}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <Select
-                        value={c.assigned_to ?? "unassigned"}
-                        onValueChange={(v) =>
-                          updateMutation.mutate({
-                            c,
-                            patch: { assigned_to: v === "unassigned" ? null : v },
-                          })
-                        }
-                      >
-                        <SelectTrigger className="h-8 w-40 text-xs"><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="unassigned">Unassigned</SelectItem>
-                          {STAFF_OPTIONS.map((s) => (
-                            <SelectItem key={s} value={s}>{s}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </TableCell>
-                    <TableCell>
-                      <Select
-                        value={c.status}
-                        onValueChange={(v) =>
-                          updateMutation.mutate({ c, patch: { status: v as ComplaintStatus } })
-                        }
-                      >
-                        <SelectTrigger className="h-8 w-32 text-xs"><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          {STATUS_FLOW.map((s) => (
-                            <SelectItem key={s} value={s}>{s}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex justify-end gap-2">
-                        <Button size="sm" variant="ghost" onClick={() => setSelected(c)}>
-                          <Eye className="mr-1 h-4 w-4" /> View
-                        </Button>
-                        {c.status === "Resolved" ? (
-                          <span className="self-center text-xs text-muted-foreground">Closed</span>
-                        ) : (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => updateMutation.mutate({ c, patch: { status: "Resolved" } })}
-                          >
-                            <CheckCircle2 className="mr-1 h-4 w-4" /> Mark resolved
-                          </Button>
-                        )}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {rows.length === 0 && (
+              <Table>
+                <TableHeader>
                   <TableRow>
-                    <TableCell colSpan={5} className="py-10 text-center text-muted-foreground">
-                      {complaintsQuery.isLoading
-                        ? "Loading complaints…"
-                        : "No complaints match these filters."}
-                    </TableCell>
+                    <TableHead>ID</TableHead>
+                    <TableHead>Complaint</TableHead>
+                    <TableHead>Assigned to</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Action</TableHead>
                   </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {rows.map((c) => (
+                    <TableRow key={c.id}>
+                      <TableCell className="font-medium">{c.reference}</TableCell>
+                      <TableCell>
+                        <span className="block">{c.title}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {c.category} · {c.location}
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        <Select
+                          value={c.assigned_to ?? "unassigned"}
+                          onValueChange={(v) =>
+                            updateMutation.mutate({
+                              c,
+                              patch: { assigned_to: v === "unassigned" ? null : v },
+                            })
+                          }
+                        >
+                          <SelectTrigger className="h-8 w-40 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="unassigned">Unassigned</SelectItem>
+                            {STAFF_OPTIONS.map((s) => (
+                              <SelectItem key={s} value={s}>
+                                {s}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </TableCell>
+                      <TableCell>
+                        <Select
+                          value={c.status}
+                          onValueChange={(v) =>
+                            updateMutation.mutate({ c, patch: { status: v as ComplaintStatus } })
+                          }
+                        >
+                          <SelectTrigger className="h-8 w-32 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {STATUS_FLOW.map((s) => (
+                              <SelectItem key={s} value={s}>
+                                {s}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex justify-end gap-2">
+                          <Button size="sm" variant="ghost" onClick={() => setSelected(c)}>
+                            <Eye className="mr-1 h-4 w-4" /> View
+                          </Button>
+                          {c.status === "Resolved" ? (
+                            <span className="self-center text-xs text-muted-foreground">
+                              Closed
+                            </span>
+                          ) : (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() =>
+                                updateMutation.mutate({ c, patch: { status: "Resolved" } })
+                              }
+                            >
+                              <CheckCircle2 className="mr-1 h-4 w-4" /> Mark resolved
+                            </Button>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  {rows.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={5} className="py-10 text-center text-muted-foreground">
+                        {complaintsQuery.isLoading
+                          ? "Loading complaints…"
+                          : "No complaints match these filters."}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
             </div>
           </CardContent>
         </Card>
@@ -484,9 +518,7 @@ function DashboardPage() {
                   {selected.status}
                 </Badge>
                 <Badge variant="secondary">Priority: {selected.priority}</Badge>
-                <Badge variant="secondary">
-                  Assigned: {selected.assigned_to ?? "Unassigned"}
-                </Badge>
+                <Badge variant="secondary">Assigned: {selected.assigned_to ?? "Unassigned"}</Badge>
               </div>
 
               <div className="space-y-1">
@@ -553,7 +585,9 @@ function DashboardPage() {
 
               {selected.status !== "Resolved" && (
                 <Button
-                  onClick={() => updateMutation.mutate({ c: selected, patch: { status: "Resolved" } })}
+                  onClick={() =>
+                    updateMutation.mutate({ c: selected, patch: { status: "Resolved" } })
+                  }
                 >
                   <CheckCircle2 className="mr-1 h-4 w-4" /> Mark resolved
                 </Button>

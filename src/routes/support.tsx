@@ -34,11 +34,26 @@ export const Route = createFileRoute("/support")({
 });
 
 const faqs = [
-  ["How long does it take to resolve a complaint?", "Most complaints get a first response within 24 hours. Electrical and water issues are prioritised and usually resolved within 48 hours."],
-  ["What do the statuses mean?", "Pending means it hasn't been assigned yet. In Progress means a department is working on it. Resolved means the issue is closed and awaiting your feedback."],
-  ["Can I report something anonymously?", "Yes. Tick the anonymous option on the submit form and your name won't be shown to the staff handling the complaint."],
-  ["Can I attach photos?", "Yes — one image per complaint, PNG or JPG up to 5 MB. Photos help staff arrive prepared."],
-  ["I lost my complaint ID. What now?", "Search on the Track page by title or category, or contact the help desk with your roll number."],
+  [
+    "How long does it take to resolve a complaint?",
+    "Most complaints get a first response within 24 hours. Electrical and water issues are prioritised and usually resolved within 48 hours.",
+  ],
+  [
+    "What do the statuses mean?",
+    "Pending means it hasn't been assigned yet. In Progress means a department is working on it. Resolved means the issue is closed and awaiting your feedback.",
+  ],
+  [
+    "Can I report something anonymously?",
+    "Yes. Tick the anonymous option on the submit form and your name won't be shown to the staff handling the complaint.",
+  ],
+  [
+    "Can I attach photos?",
+    "Yes — one image per complaint, PNG or JPG up to 5 MB. Photos help staff arrive prepared.",
+  ],
+  [
+    "I lost my complaint ID. What now?",
+    "Search on the Track page by title or category, or contact the help desk with your roll number.",
+  ],
 ];
 
 function SupportPage() {
@@ -82,7 +97,9 @@ function SupportPage() {
             className="space-y-4"
             onSubmit={(e) => {
               e.preventDefault();
-              toast.success("Message sent", { description: "Demo only — no message was delivered." });
+              toast.success("Message sent", {
+                description: "Demo only — no message was delivered.",
+              });
             }}
           >
             <div className="grid gap-4 sm:grid-cols-2">

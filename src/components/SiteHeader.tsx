@@ -38,7 +38,9 @@ export function SiteHeader() {
           />
           <span className="font-display text-sm font-extrabold leading-tight text-primary sm:text-base">
             Smart Campus
-            <span className="block text-xs font-normal text-muted-foreground">Complaint Portal</span>
+            <span className="block text-xs font-normal text-muted-foreground">
+              Complaint Portal
+            </span>
           </span>
         </Link>
 
@@ -70,13 +72,17 @@ export function SiteHeader() {
               <LogOut className="mr-1 h-4 w-4" /> Sign out
             </Button>
           ) : (
-            <Button asChild variant="outline" size="sm" className="hidden rounded-xl font-semibold sm:inline-flex">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="hidden rounded-xl font-semibold sm:inline-flex"
+            >
               <Link to="/auth">Sign in</Link>
             </Button>
           )}
         </div>
       </div>
-
     </header>
   );
 }
