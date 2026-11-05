@@ -9,9 +9,9 @@
 <br/>
 
 [![Live Website](https://img.shields.io/badge/🌐_Live_Website-Visit_Now-2563EB?style=for-the-badge&logoColor=white)](https://student-complaint-01.lovable.app)
-[![Stars](https://img.shields.io/github/stars/your-username/smart-campus-complaint-portal?style=for-the-badge&color=F59E0B)](https://github.com/your-username/smart-campus-complaint-portal/stargazers)
+[![Stars](https://img.shields.io/github/stars/Nishanth2434/Smart-campus-complaint?style=for-the-badge&color=F59E0B)](https://github.com/Nishanth2434/Smart-campus-complaint/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.0.0-6366F1?style=for-the-badge)](https://github.com/your-username/smart-campus-complaint-portal/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.0-6366F1?style=for-the-badge)](https://github.com/Nishanth2434/Smart-campus-complaint/releases)
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org)
@@ -35,10 +35,13 @@
 
 <br/><br/>
 
-| Area                   | URL                                                  |
-| :--------------------- | :--------------------------------------------------- |
-| 🎓 Student portal      | https://student-complaint-01.lovable.app             |
-| 🛡️ Staff / admin login | https://student-complaint-01.lovable.app/admin/login |
+| Area                   | URL                                                  | Access / Credentials                          |
+| :--------------------- | :--------------------------------------------------- | :-------------------------------------------- |
+| 🌐 Live Vercel / Lovable | https://smart-campus-complaint-jdui62ny6-nishu5.vercel.app | Production deployment                      |
+| 💻 Local Dev Server    | http://localhost:8080                                | `npm run dev`                                 |
+| 🐳 Docker Container    | http://localhost:3000                                | `docker compose up --build`                   |
+| 🎓 Student Login       | http://localhost:8080/auth                           | Register or sign in with student email        |
+| 🛡️ Staff / Admin Login | http://localhost:8080/admin/login                    | **Email:** `principle@gmail.com`<br/>**Password:** `123456` |
 
 </div>
 
@@ -265,7 +268,7 @@ smart-campus-complaint-portal/
 <summary><b>1 · Clone the repository</b></summary>
 
 ```bash
-git clone https://github.com/your-username/smart-campus-complaint-portal.git
+git clone https://github.com/Nishanth2434/Smart-campus-complaint.git
 cd smart-campus-complaint-portal
 ```
 
@@ -312,24 +315,52 @@ npm run preview  # preview the production build
 <details open>
 <summary><b>6 · Run with Docker (Containerized)</b></summary>
 
-You can build and run this application inside Docker with a single command:
+You can build and run this complete full-stack application inside Docker with a single command. The container uses a multi-stage `node:22-alpine` build with Nitro standalone SSR server, resulting in a lightweight (~100MB) image with zero `node_modules` at runtime.
 
-**Using Docker Compose (Recommended):**
+#### Option A: Using Docker Compose (Recommended)
+
 ```bash
+# Start container with live logs
 docker compose up --build
+
+# Or start in detached (background) mode
+docker compose up -d --build
+
+# Stop the container
+docker compose down
 ```
 The application will be live at **`http://localhost:3000`**.
 
-**Using Docker CLI directly:**
+#### Option B: Using Docker CLI directly
+
 ```bash
-# Build the image
+# 1. Build the production image
 docker build -t smart-campus-complaint-portal .
 
-# Run the container
+# 2. Run the container
 docker run -d -p 3000:3000 --name campus-portal smart-campus-complaint-portal
 ```
 
+#### Docker Features:
+- **Multi-Stage Build**: Separates build dependencies from production runtime.
+- **Lightweight & Fast**: Powered by `node:22-alpine` and Nitro standalone bundling.
+- **Security**: Runs strictly under a non-root `node` user.
+- **Health Checks**: Automated HTTP health checking on port 3000 every 30 seconds.
+
 </details>
+
+---
+
+## 🔐 Default Test Accounts & Authentication
+
+| Role | Email | Password | Details |
+| :--- | :--- | :--- | :--- |
+| **System Administrator** | `principle@gmail.com` | `123456` | Full access to manage complaints, analytics, reports, and team assignments |
+| **Demo Mode** | Click *"Demo mode"* on login | N/A | Instant read-only walkthrough with pre-populated dummy data without sign-in |
+| **Student** | Any registered email | Min. 6 characters | Submit complaints, upload proof photos, track status timeline in real-time |
+
+> [!NOTE]
+> If authentication fails with a network or fetch error, ensure the Supabase project (`uvnrldvfyzbwizqqzdxa`) is active. Free-tier Supabase projects can automatically pause after periods of inactivity and can be resumed with one click in the Supabase Dashboard.
 
 ---
 
@@ -637,9 +668,9 @@ MIT License © 2026 NISHANTH B
     <td>
       <p>Built the Smart Campus Complaint Portal end-to-end — design system, frontend, database schema and admin analytics.</p>
       <a href="https://linkedin.com/in/your-profile"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-      <a href="https://github.com/your-username"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+      <a href="https://github.com/Nishanth2434"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
       <a href="https://your-portfolio.com"><img src="https://img.shields.io/badge/Portfolio-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
-      <a href="mailto:you@example.com"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+      <a href="mailto:nishanthbnishu24@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
     </td>
   </tr>
 </table>
@@ -652,14 +683,14 @@ If this project helped you or you like what you see:
 
 - ⭐ **Star** this repository
 - 🍴 **Fork** it and build your own campus portal
-- 🐞 **Report bugs** in [Issues](https://github.com/your-username/smart-campus-complaint-portal/issues)
-- 💡 **Request features** in [Discussions](https://github.com/your-username/smart-campus-complaint-portal/discussions)
+- 🐞 **Report bugs** in [Issues](https://github.com/Nishanth2434/Smart-campus-complaint/issues)
+- 💡 **Request features** in [Discussions](https://github.com/Nishanth2434/Smart-campus-complaint/discussions)
 
 <div align="center">
 
 ### ⭐ Star the repo — it genuinely helps!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=your-username/smart-campus-complaint-portal&type=Date)](https://star-history.com/#your-username/smart-campus-complaint-portal&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Nishanth2434/Smart-campus-complaint&type=Date)](https://star-history.com/#Nishanth2434/Smart-campus-complaint&Date)
 
 </div>
 
