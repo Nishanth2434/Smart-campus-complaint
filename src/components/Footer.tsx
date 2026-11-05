@@ -27,6 +27,11 @@ export default function Footer() {
                   Track status
                 </Link>
               </li>
+              <li>
+                <Link to="/login" className="hover:text-brand-500">
+                  Student login
+                </Link>
+              </li>
             </ul>
           </div>
 

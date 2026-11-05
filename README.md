@@ -69,7 +69,12 @@ To complete the **Docker-Based Web Application** assignment without modifying an
 
 - **Issue Submission**: File new complaints with category tags (Hostel, Academic, IT/WiFi, Infrastructure, Canteen), urgency levels, and location markers.
 - **Complaint Tracking**: Search and trace tickets via unique Complaint ID with status badges (`Pending`, `In Progress`, `Resolved`).
-- **Administrative Portal**: Secure admin authentication interface for maintenance staff to review and update complaint statuses.
+- **Student Authentication (`/login`)**: Sign in or create a student account with full name and Roll ID, plus one-click demo student login.
+- **Administrative Portal & Dashboard (`/admin/login`, `/admin/dashboard`)**:
+  - Default staff credentials: `principle@gmail.com` / `123456`
+  - Control panel with live status counters (Pending, In Progress, Resolved).
+  - Real-time status toggling and ticket resolution.
+  - One-click demo admin login for instant evaluation.
 - **Interactive 3D Elements**: Powered by Three.js and React Three Fiber for campus visualization.
 - **Accessible & Responsive**: Fully responsive UI supporting both desktop and mobile screens with smooth transitions (Framer Motion).
 - **Single Page Application (SPA) Routing**: Seamless client-side navigation with fallback Nginx routing for direct URL access and page refreshes.
@@ -285,13 +290,15 @@ The application was tested across production compilation and routing functionali
 
 | Test Case | Target | Expected Result | Actual Result | Status |
 |---|---|---|---|---|
-| **Production Build** | `npm run build` | Clean TypeScript check & Vite minification | Built in 1.82s into `dist/` | **PASS** |
+| **Production Build** | `npm run build` | Clean TypeScript check & Vite minification | Built cleanly into `dist/` | **PASS** |
 | **Homepage Route** | `GET /` | Returns HTTP 200 with HTML shell | HTTP 200 OK | **PASS** |
 | **About Page Route** | `GET /about` | Returns HTTP 200 without 404 | HTTP 200 OK | **PASS** |
 | **Submit Complaint Route** | `GET /submit` | Returns HTTP 200 without 404 | HTTP 200 OK | **PASS** |
 | **Track Complaint Route** | `GET /track` | Returns HTTP 200 without 404 | HTTP 200 OK | **PASS** |
 | **Support Page Route** | `GET /support` | Returns HTTP 200 without 404 | HTTP 200 OK | **PASS** |
+| **Student Login Route** | `GET /login` | Returns HTTP 200 without 404 | HTTP 200 OK | **PASS** |
 | **Admin Login Route** | `GET /admin/login` | Returns HTTP 200 without 404 | HTTP 200 OK | **PASS** |
+| **Admin Dashboard Route**| `GET /admin/dashboard`| Returns HTTP 200 without 404 | HTTP 200 OK | **PASS** |
 | **Static Assets** | `GET /favicon.svg` | SVG asset loads properly | HTTP 200 OK | **PASS** |
 
 ---

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
+import { useAuth } from "../context/AuthContext";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -12,6 +13,13 @@ const navLinks = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleSignOut() {
+    logout();
+    navigate("/");
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b-2 border-ink-950 bg-paper/90 backdrop-blur-md">
@@ -35,9 +43,45 @@ export default function Header() {
               {link.label}
             </NavLink>
           ))}
+          {isAdmin && (
+            <NavLink
+              to="/admin/dashboard"
+              className={({ isActive }) =>
+                `rounded-md px-3.5 py-2 text-sm font-semibold transition-colors ${
+                  isActive
+                    ? "bg-brand-500 text-ink-950 font-bold"
+                    : "text-brand-700 hover:bg-brand-50 font-bold"
+                }`
+              }
+            >
+              Admin Dashboard
+            </NavLink>
+          )}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          {isAuthenticated ? (
+            <div className="flex items-center gap-2">
+              <span className="rounded-full border border-ink-950/20 bg-paper-alt px-3 py-1 font-mono text-xs font-semibold text-ink-800">
+                👤 {user?.name}
+              </span>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="rounded-md border-2 border-ink-950 bg-paper-alt px-3 py-1.5 text-xs font-bold text-ink-950 transition-colors hover:bg-brand-100"
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="rounded-md border-2 border-ink-950 bg-paper-alt px-3.5 py-2 text-sm font-bold text-ink-950 transition-colors hover:bg-brand-100"
+            >
+              Sign In
+            </Link>
+          )}
+
           <Link
             to="/submit"
             className="rounded-md border-2 border-ink-950 bg-brand-500 px-4 py-2 text-sm font-bold text-ink-950 shadow-[3px_3px_0_0_#14110d] transition-transform hover:-translate-y-0.5 hover:shadow-[4px_5px_0_0_#14110d]"
@@ -83,13 +127,56 @@ export default function Header() {
                 {link.label}
               </NavLink>
             ))}
-            <Link
-              to="/submit"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-md border-2 border-ink-950 bg-brand-500 px-4 py-2.5 text-center text-sm font-bold text-ink-950 shadow-[3px_3px_0_0_#14110d]"
-            >
-              Start complaint
-            </Link>
+
+            {isAdmin && (
+              <NavLink
+                to="/admin/dashboard"
+                onClick={() => setOpen(false)}
+                className={({ isActive }) =>
+                  `rounded-md px-3 py-2.5 text-sm font-bold text-brand-700 ${
+                    isActive ? "bg-brand-500 text-ink-950" : "hover:bg-brand-50"
+                  }`
+                }
+              >
+                Admin Dashboard
+              </NavLink>
+            )}
+
+            <div className="mt-2 flex flex-col gap-2 border-t border-ink-950/15 pt-3">
+              {isAuthenticated ? (
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-semibold text-ink-800">
+                    👤 {user?.name}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleSignOut();
+                      setOpen(false);
+                    }}
+                    className="rounded border border-ink-950 bg-paper-alt px-3 py-1 text-xs font-bold"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md border-2 border-ink-950 bg-paper-alt px-4 py-2 text-center text-sm font-bold text-ink-950"
+                >
+                  Sign In
+                </Link>
+              )}
+
+              <Link
+                to="/submit"
+                onClick={() => setOpen(false)}
+                className="rounded-md border-2 border-ink-950 bg-brand-500 px-4 py-2.5 text-center text-sm font-bold text-ink-950 shadow-[3px_3px_0_0_#14110d]"
+              >
+                Start complaint
+              </Link>
+            </div>
           </div>
         </nav>
       )}
