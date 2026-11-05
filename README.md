@@ -3,6 +3,7 @@
 A modern, high-performance, containerized web application designed for campus incident reporting, tracking, and administrative resolution. Built with React 19, Vite, and Tailwind CSS, and packaged with a production-grade multi-stage Docker configuration served by Nginx.
 
 - **Live Website:** [https://smart-campus-complaint.vercel.app/](https://smart-campus-complaint.vercel.app/)
+- **GitHub Repository:** [https://github.com/Nishanth2434/Smart-campus-complaint](https://github.com/Nishanth2434/Smart-campus-complaint)
 - **Project Title:** Docker-Based Web Application (College Assignment)
 
 ---
@@ -344,4 +345,4 @@ Here is a breakdown of the 5 core assignment requirements:
 2. **Dockerfile**: A multi-stage Docker build separating the compilation phase (Node.js 20 Alpine) from the runtime phase (Nginx Alpine) to ensure maximum performance and minimal image size.
 3. **Docker Image**: The packaged immutable artifact `smart-campus-complaint` containing the pre-compiled static assets and configured Nginx server.
 4. **Docker Container**: The running instance `smart-campus-container` running on host port `8080`, configured with healthchecks and SPA fallback routing.
-5. **GitHub Repository**: The repository containing all source code, Docker configs, Nginx setup, Docker Compose file, and documentation.
+5. **GitHub Repository**: The repository ([https://github.com/Nishanth2434/Smart-campus-complaint](https://github.com/Nishanth2434/Smart-campus-complaint)) containing all source code, Docker configs, Nginx setup, Docker Compose file, and documentation.
