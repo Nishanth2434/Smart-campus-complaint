@@ -1,16 +1,25 @@
+version: "3.8"
+
 services:
-  smart-campus-complaint:
+  smart-campus-portal:
     build:
       context: .
       dockerfile: Dockerfile
-    image: smart-campus-complaint:latest
-    container_name: smart-campus-container
-    ports:
-      - "8080:80"
+      args:
+        - VITE_SUPABASE_URL=${VITE_SUPABASE_URL:-https://uvnrldvfyzbwizqqzdxa.supabase.co}
+        - VITE_SUPABASE_PUBLISHABLE_KEY=${VITE_SUPABASE_PUBLISHABLE_KEY:-sb_publishable_Qd2D9EM_GtWdtPu-xboWJw_aOJBHi06}
+        - VITE_SUPABASE_PROJECT_ID=${VITE_SUPABASE_PROJECT_ID:-uvnrldvfyzbwizqqzdxa}
+        - SUPABASE_URL=${SUPABASE_URL:-https://uvnrldvfyzbwizqqzdxa.supabase.co}
+        - SUPABASE_PUBLISHABLE_KEY=${SUPABASE_PUBLISHABLE_KEY:-sb_publishable_Qd2D9EM_GtWdtPu-xboWJw_aOJBHi06}
+        - SUPABASE_PROJECT_ID=${SUPABASE_PROJECT_ID:-uvnrldvfyzbwizqqzdxa}
+    container_name: smart-campus-complaint-portal
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:80/ || exit 1"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
-      start_period: 5s
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - SUPABASE_URL=${SUPABASE_URL:-https://uvnrldvfyzbwizqqzdxa.supabase.co}
+      - SUPABASE_PUBLISHABLE_KEY=${SUPABASE_PUBLISHABLE_KEY:-sb_publishable_Qd2D9EM_GtWdtPu-xboWJw_aOJBHi06}
+      - SUPABASE_PROJECT_ID=${SUPABASE_PROJECT_ID:-uvnrldvfyzbwizqqzdxa}

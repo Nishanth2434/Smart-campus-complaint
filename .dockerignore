@@ -1,43 +1,17 @@
-# Dependency directories
-node_modules/
-
-# Local build artifacts and cache
-dist/
-dist-ssr/
-.cache/
-
-# Git and version control
-.git/
+node_modules
+.output
+.tanstack
+.vinxi
+.nitro
+dist
+dist-ssr
+.git
 .gitignore
-
-# Environment files and credentials
-.env
-.env.*
-*.local
-
-# Logs
-logs/
-*.log
+.env.local
+.vscode
+.claude
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-
-# Editor and IDE configurations
-.vscode/
-.idea/
-.claude/
-*.sw?
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-
-# Docker artifacts
-Dockerfile*
-docker-compose*.yml
-.dockerignore
-
-# OS metadata
 .DS_Store
 Thumbs.db

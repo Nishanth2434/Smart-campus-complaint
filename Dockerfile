@@ -1,45 +1,66 @@
-# Multi-Stage Build Dockerfile for Smart Campus Complaint Portal
+# ==========================================
+# Stage 1: Build the Application
+# ==========================================
+FROM node:22-alpine AS builder
 
-# -----------------------------------------------------------------------------
-# Stage 1: Build Stage
-# -----------------------------------------------------------------------------
-FROM node:20-alpine AS builder
-
-# Set working directory
 WORKDIR /app
 
-# Copy dependency manifests first to leverage Docker layer caching
-COPY package.json package-lock.json ./
+# Install dependencies required for native modules and build tools
+RUN apk add --no-cache libc6-compat
 
-# Install clean, frozen dependencies
-RUN npm ci
+# Copy dependency definitions
+COPY package.json package-lock.json* ./
 
-# Copy application source code and configuration files
+# Install project dependencies
+RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+
+# Copy full application source
 COPY . .
 
-# Build the production single-page application into /app/dist
+# Build-time environment arguments (with working defaults from project setup)
+ARG VITE_SUPABASE_URL="https://uvnrldvfyzbwizqqzdxa.supabase.co"
+ARG VITE_SUPABASE_PUBLISHABLE_KEY="sb_publishable_Qd2D9EM_GtWdtPu-xboWJw_aOJBHi06"
+ARG VITE_SUPABASE_PROJECT_ID="uvnrldvfyzbwizqqzdxa"
+ARG SUPABASE_URL="https://uvnrldvfyzbwizqqzdxa.supabase.co"
+ARG SUPABASE_PUBLISHABLE_KEY="sb_publishable_Qd2D9EM_GtWdtPu-xboWJw_aOJBHi06"
+ARG SUPABASE_PROJECT_ID="uvnrldvfyzbwizqqzdxa"
+
+ENV VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+ENV VITE_SUPABASE_PUBLISHABLE_KEY=${VITE_SUPABASE_PUBLISHABLE_KEY}
+ENV VITE_SUPABASE_PROJECT_ID=${VITE_SUPABASE_PROJECT_ID}
+ENV SUPABASE_URL=${SUPABASE_URL}
+ENV SUPABASE_PUBLISHABLE_KEY=${SUPABASE_PUBLISHABLE_KEY}
+ENV SUPABASE_PROJECT_ID=${SUPABASE_PROJECT_ID}
+
+# Instruct Nitro to produce a standalone Node.js production server
+ENV NITRO_PRESET=node-server
+ENV NODE_ENV=production
+
+# Compile client bundle and standalone SSR server into .output
 RUN npm run build
 
-# -----------------------------------------------------------------------------
-# Stage 2: Production Runtime Stage
-# -----------------------------------------------------------------------------
-FROM nginx:alpine AS runner
+# ==========================================
+# Stage 2: Production Runner
+# ==========================================
+FROM node:22-alpine AS runner
 
-# Remove default nginx static html files
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copy custom Nginx configuration for SPA routing & compression
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=3000
 
-# Copy production build artifacts from the builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Run container as non-root user
+USER node
 
-# Expose HTTP port
-EXPOSE 80
+# Copy only the compiled standalone bundle (no node_modules needed!)
+COPY --from=builder --chown=node:node /app/.output ./.output
 
-# Health check to ensure Nginx is healthy and serving requests
-HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
-  CMD wget -qO- http://localhost:80/ || exit 1
+EXPOSE 3000
 
-# Start Nginx in foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Health check to ensure server responds
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/ || exit 1
+
+# Start Nitro Node.js standalone server
+CMD ["node", ".output/server/index.mjs"]
